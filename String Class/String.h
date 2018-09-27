@@ -13,46 +13,44 @@ public:
 	String()
 	{
 		Alloc(1);
-		Clear();
-	}
-	
-	String(const char* str)
-	{
-		unsigned int size = strlen(str) + 1;
-		if (size > 0) Alloc(size);
-		strcpy_s(this->str, size, str);
+		str = "x";
 	}
 
-	String(const String& str)
+	String(const String& string)
 	{
-		unsigned int size = strlen(str.str) + 1;
-		if (size > 0) Alloc(size);
-		strcpy_s(this->str, size, str.str);
+		Alloc(string.size);
+		strcpy_s(str, size, string.str);
 	}
 
-	~String()
+	String(const char* string)
 	{
-		delete[] str;
+		unsigned int size = strlen(string) + 1;
+		Alloc(size);
+		strcpy_s(str, size, string);
 	}
 
-	String operator = (const String& str)
+	void Print()
 	{
-		delete[] this->str;
-		unsigned int size = strlen(str.str) + 1;
-		if (size > 0) Alloc(size);
-		strcpy_s(this->str, size, str.str);
-		return *this;
+		printf("%s\n", str);
 	}
 
-	void Alloc(unsigned int size)
+	void Alloc(unsigned int size) 
 	{
 		str = new char[size];
 	}
 
-	void Clear()
+	/*String operator = (const String& string)
 	{
-		str[0] = '\n';
-	}
+		if (strlen(string) > size)
+		{
 
+		}
+	}*/
+
+	bool operator == (const String& string) const
+	{
+		return strcmp(str, string.str);
+	}
 };
+
 #endif // !_STRING_H__

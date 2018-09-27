@@ -3,13 +3,9 @@
 
 int main()
 {
-	String s1;
-	String s2("hello");
-	String s3(s2);
+	String s1("fornite mola");
 
-	s3 = s2;
-	printf("%s\n", s2);
-	printf("%s\n", s3);
+	s1.Print();
 
 	system("pause");
 	return 0;
