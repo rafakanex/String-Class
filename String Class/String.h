@@ -13,18 +13,19 @@ public:
 	String()
 	{
 		Alloc(1);
-		str = "x";
+		str[0] = '\n';
 	}
 
 	String(const String& string)
 	{
+		size = strlen(string.str) + 1;
 		Alloc(string.size);
 		strcpy_s(str, size, string.str);
 	}
 
 	String(const char* string)
 	{
-		unsigned int size = strlen(string) + 1;
+		size = strlen(string) + 1;
 		Alloc(size);
 		strcpy_s(str, size, string);
 	}
@@ -39,13 +40,19 @@ public:
 		str = new char[size];
 	}
 
-	/*String operator = (const String& string)
+	String operator = (const String& string)
 	{
-		if (strlen(string) > size)
+		if (string.size > size)
 		{
-
+			delete[] str;
+			Alloc(string.size);
 		}
-	}*/
+		else
+			str[0] = '\n';
+
+		strcpy_s(str, string.size, string.str);
+		return *this;
+	}
 
 	bool operator == (const String& string) const
 	{

@@ -3,10 +3,14 @@
 
 int main()
 {
-	String s1("fornite mola");
+	String s1("hello");
+	String s2(s1);
+	String s3("helloo");
 
-	s1.Print();
-
+	s2.Print();
+	
+	s2 = s3;
+	s2.Print();
 	system("pause");
 	return 0;
 }
