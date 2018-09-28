@@ -48,7 +48,7 @@ public:
 			Alloc(string.size);
 		}
 		else
-			str[0] = '\n';
+			str[0] = '\n'; 
 
 		strcpy_s(str, string.size, string.str);
 		return *this;
