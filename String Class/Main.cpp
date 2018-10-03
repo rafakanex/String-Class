@@ -3,18 +3,13 @@
 
 int main()
 {
-	String s1("hello");
-	String s2(s1);
-	String s3("helloo");
-	String s4;
+	String str1("Wuuba lubba dub dub!");
+	String str2(str1);
+	String str3 = "Wuuba lubba dub dub!";
+	String str4 = str3;
 
-	s2.Print();
-	
-	s2 = s3;
-	s2.Print();
+	if (str1 == str2 && str2 == str3 && str3 == str4)printf("Wuuba lubba dub dub!\n");
 
-	s4 = "hellooo";
-	s4.Print();
 	system("pause");
 	return 0;
 }

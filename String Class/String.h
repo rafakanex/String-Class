@@ -5,7 +5,7 @@
 
 class String
 {
-private: 
+private:
 	char* str;
 	unsigned int size;
 
@@ -13,14 +13,7 @@ public:
 	String()
 	{
 		Alloc(1);
-		str[0] = '\n';
-	}
-
-	String(const String& string)
-	{
-		size = strlen(string.str) + 1;
-		Alloc(string.size);
-		strcpy_s(str, size, string.str);
+		Clear();
 	}
 
 	String(const char* string)
@@ -30,33 +23,51 @@ public:
 		strcpy_s(str, size, string);
 	}
 
-	void Print()
+	String(const String& string)
 	{
-		printf("%s\n", str);
+		size = string.size;
+		Alloc(size);
+		strcpy_s(str, size, string.str);
 	}
 
-	void Alloc(unsigned int size) 
+	~String()
 	{
-		str = new char[size];
+		delete[] str; // cannot be nullptr cause of the default constructor -> Clear()
 	}
 
-	String operator = (const String& string)
+	String operator = (const char* string)
 	{
-		if (string.size > size)
+		if (string != nullptr)
 		{
-			delete[] str;
-			Alloc(string.size);
+			if (strlen(string) + 1 > size)
+			{
+				size = strlen(string) + 1;
+				Alloc(size);
+			}
+			else
+				Clear();
+
+			strcpy_s(str, size, string);
 		}
 		else
-			str[0] = '\n'; 
+			Clear(); // clear string if it's empty
 
-		strcpy_s(str, string.size, string.str);
 		return *this;
 	}
 
-	bool operator == (const String& string) const
+	bool operator == (const String& string)
 	{
-		return strcmp(str, string.str);
+		return strcmp(str, string.str) == 0;
+	}
+
+	void Alloc(const unsigned int memory)
+	{
+		str = new char[memory];
+	}
+
+	void Clear()
+	{
+		str[0] = '\0'; // or memset
 	}
 };
 
