@@ -55,17 +55,17 @@ public:
 		return *this;
 	}
 
-	bool operator == (const String& string)
+	bool operator == (const String& string) const
 	{
 		return strcmp(str, string.str) == 0;
 	}
 
-	void Alloc(const unsigned int memory)
+	void Alloc(const unsigned int memory) 
 	{
 		str = new char[memory];
 	}
 
-	void Clear()
+	void Clear() const
 	{
 		str[0] = '\0'; // or memset
 	}
