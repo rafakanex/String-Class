@@ -39,7 +39,7 @@ public:
 	{
 		if (string != nullptr)
 		{
-			if (strlen(string) + 1 > size)
+			if (strlen(string) + 1 > size) // it's better having more unsued char allocated than deleting and allocating again
 			{
 				size = strlen(string) + 1;
 				Alloc(size);
