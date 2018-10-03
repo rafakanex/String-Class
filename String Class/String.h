@@ -12,21 +12,21 @@ private:
 public:
 	String()
 	{
-		Alloc(1);
-		Clear();
+		str = new char[size];
+		str[0] = '\0'; 
 	}
 
 	String(const char* string)
 	{
 		size = strlen(string) + 1;
-		Alloc(size);
+		str = new char[size];
 		strcpy_s(str, size, string);
 	}
 
 	String(const String& string)
 	{
 		size = string.size;
-		Alloc(size);
+		str = new char[size];
 		strcpy_s(str, size, string.str);
 	}
 
@@ -42,15 +42,15 @@ public:
 			if (strlen(string) + 1 > size) // it's better having more unsued char allocated than deleting and allocating again
 			{
 				size = strlen(string) + 1;
-				Alloc(size);
+				str = new char[size];
 			}
 			else
-				Clear();
+				str[0] = '\0';
 
 			strcpy_s(str, size, string);
 		}
 		else
-			Clear(); // clear string if it's empty
+			str[0] = '\0'; // clear string if it's empty
 
 		return *this;
 	}
@@ -60,15 +60,15 @@ public:
 		return strcmp(str, string.str) == 0;
 	}
 
-	void Alloc(const unsigned int memory) 
+	/*void Alloc(const unsigned int memory) 
 	{
-		str = new char[memory];
+		str = new char[size];
 	}
 
 	void Clear() const
 	{
 		str[0] = '\0'; // or memset
-	}
+	}*/
 };
 
 #endif // !_STRING_H__
